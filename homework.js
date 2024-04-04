@@ -2,18 +2,19 @@
 /*
 Banking System
 
-Create an Account class with the properties accountNumber, currentBalance, and owner. The Account should have methods to deposit and withdraw. The 
+(X) Create an Account class with the properties accountNumber, currentBalance, and owner. The Account should have methods to deposit and withdraw. The 
 deposit method should add that amount to the currentBalance. The withdraw method should first check if there is enough to withdraw before withdrawing
 
-Implement child classes CheckingAccount and SavingsAccount, each inheriting from the Account class. 
+(X) Implement child classes CheckingAccount and SavingsAccount, each inheriting from the Account class. 
 
-The CheckingAccount will also have an overdraftLimit property. Override the withdraw method to 
+( )The CheckingAccount will also have an overdraftLimit property. Override the withdraw method to 
 first check if there is enough (+ overdraftLimit) before withdrawing.
 
-The SavingsAccount will also have an interestRate. Add a method addInterest that will increase the currentBalance by that interest rate
+( )The SavingsAccount will also have an interestRate. Add a method addInterest that will increase the currentBalance by that interest rate
 
 */
 
+// Account Class with Deposit & Withdrawal: 
 
 class Account{
     constructor(accountNumber, currentBalance, owner){
@@ -45,8 +46,36 @@ console.log(lexieacc.currentBalance)
 lexieacc.withdraw(75.00);
 lexieacc.withdraw(80)
 
+// Checking Account (child) with overdraftLimit property
+    // for example, if overdraftLimit = $30, then they can withdraw currentBalance + 30 
+class checkingAccount extends Account{
+    constructor(accountNumber, currentBalance, owner, overdraftLimit){
+        super(accountNumber, currentBalance, owner);
+        this.overdraftLimit = overdraftLimit;
+    }
+
+    withdraw(withdrawAmount){
+        if (this.withdrawAmount < this.overdraftLimit + this.currentBalance){
+            this.currentBalance -= withdrawAmount
+            console.log(`You have withdrawn $${this.withdrawAmount} and now have a remaining balance of $${this.currentBalance}`)
+        } else {
+            return console.log('You are trying to withdraw more than your balance and overdraft limit.')
+        };
+    };
+};
+
+let janechecking = new checkingAccount(2, 100, 'Jane', 30);
+janechecking.deposit(100); 
+console.log(janechecking.currentBalance) // 200
 
 
+
+// Savings Account (child) with 
+class savingsAccount extends Account{
+    constructor(accountNumber, currentBalance, owner){
+        super(accountNumber, currentBalance, owner);
+    }
+}
 
 
 // const checkingAccount = new CheckingAccount('123456', 1000, 'John Doe', 500);
