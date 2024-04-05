@@ -39,14 +39,15 @@ lexieacc.withdraw(80) */
 
 // Checking Account (child) with overdraftLimit property
     // for example, if overdraftLimit = $30, then they can withdraw currentBalance + 30 
-class checkingAccount extends Account{
+class CheckingAccount extends Account{
     constructor(accountNumber, currentBalance, owner, overdraftLimit){
         super(accountNumber, currentBalance, owner);
         this.overdraftLimit = overdraftLimit;
     }
 
     withdraw(withdrawAmount){
-        if (this.withdrawAmount < this.overdraftLimit + this.currentBalance){
+        this.withdrawAmount = withdrawAmount;
+        if (withdrawAmount < this.overdraftLimit + this.currentBalance){
             this.currentBalance -= withdrawAmount
             console.log(`You have withdrawn $${this.withdrawAmount} and now have a remaining balance of $${this.currentBalance}.`)
         } else {
@@ -55,11 +56,12 @@ class checkingAccount extends Account{
     };
 };
 
-let janechecking = new checkingAccount(2, 100, 'Jane', 30);
+/* Test Code:
+let janechecking = new CheckingAccount(2, 100, 'Jane', 30);
 janechecking.deposit(100); 
 console.log(janechecking.currentBalance) // 200
 janechecking.withdraw(250)
-
+*/
 
 // Savings Account (child) with interestRate
 class SavingsAccount extends Account{
@@ -75,12 +77,12 @@ class SavingsAccount extends Account{
 }
 
 
-// const checkingAccount = new CheckingAccount('123456', 1000, 'John Doe', 500);
+const checkingAccount = new CheckingAccount('123456', 1000, 'John Doe', 500);
 const savingsAccount = new SavingsAccount('654321', 5000, 'Jane Smith', 2);
 
-// checkingAccount.deposit(500);
-// checkingAccount.withdraw(1400);
-// checkingAccount.withdraw(200);  
+checkingAccount.deposit(500); // Your new balance is $1500
+checkingAccount.withdraw(1400); // You have withdrawn $1400 and now have a reminaing balance of $100
+checkingAccount.withdraw(200); // You have withdrawn $200 and now have a reminaing balance of $-100
 
 savingsAccount.deposit(1000); // Your new balance is $6000
 savingsAccount.withdraw(7000); // You do not have sufficient funds.
