@@ -136,6 +136,12 @@ printMovieInfo('ET')
 // Exercise 3
 // Add a Button somewhere on your index.html page with an id "backgroundChanger"
 // Add a click event listener to your button that will change the background color of the body
+
+document.getElementById('backgroundChanger').addEventListener("click", function() {
+    const curColour = document.body.style.backgroundColor;
+    document.body.style.backgroundColor = curColour === 'red' ? 'blue' : 'red';
+});
+
 // The background should toggle between at least 2 colors
 
 
