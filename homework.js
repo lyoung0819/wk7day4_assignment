@@ -1,21 +1,11 @@
 // Exercise 1
-/*
-Banking System
-
-(X) Create an Account class with the properties accountNumber, currentBalance, and owner. The Account should have methods to deposit and withdraw. The 
-deposit method should add that amount to the currentBalance. The withdraw method should first check if there is enough to withdraw before withdrawing
-
-(X) Implement child classes CheckingAccount and SavingsAccount, each inheriting from the Account class. 
-
-( )The CheckingAccount will also have an overdraftLimit property. Override the withdraw method to 
+/*   Banking System
+(X)The CheckingAccount will also have an overdraftLimit property. Override the withdraw method to 
 first check if there is enough (+ overdraftLimit) before withdrawing.
-
-( )The SavingsAccount will also have an interestRate. Add a method addInterest that will increase the currentBalance by that interest rate
-
 */
 
-// Account Class with Deposit & Withdrawal: 
 
+// Account Class with Deposit & Withdrawal: 
 class Account{
     constructor(accountNumber, currentBalance, owner){
         this.accountNumber = accountNumber,
@@ -26,25 +16,26 @@ class Account{
     deposit(depositAmount){
         this.depositAmount = depositAmount
         this.currentBalance += this.depositAmount
-        return console.log(`Your new balance is $${this.currentBalance}`)
+        return console.log(`Your new balance is $${this.currentBalance}.`)
     }
 
     withdraw(withdrawAmount){
         this.withdrawAmount = withdrawAmount
         if (this.withdrawAmount < this.currentBalance){
             this.currentBalance -= this.withdrawAmount
-            console.log(`You have withdrawn $${this.withdrawAmount} and now have a remaining balance of $${this.currentBalance}`)
+            console.log(`You have withdrawn $${this.withdrawAmount} and now have a remaining balance of $${this.currentBalance}.`)
         } else {
             return console.log('You do not have sufficient funds.')
         }
     }
 }
 
+/* Test Code: 
 let lexieacc = new Account(1, 5.00, 'lexie')
 lexieacc.deposit(75.00);
 console.log(lexieacc.currentBalance)
 lexieacc.withdraw(75.00);
-lexieacc.withdraw(80)
+lexieacc.withdraw(80) */
 
 // Checking Account (child) with overdraftLimit property
     // for example, if overdraftLimit = $30, then they can withdraw currentBalance + 30 
@@ -57,7 +48,7 @@ class checkingAccount extends Account{
     withdraw(withdrawAmount){
         if (this.withdrawAmount < this.overdraftLimit + this.currentBalance){
             this.currentBalance -= withdrawAmount
-            console.log(`You have withdrawn $${this.withdrawAmount} and now have a remaining balance of $${this.currentBalance}`)
+            console.log(`You have withdrawn $${this.withdrawAmount} and now have a remaining balance of $${this.currentBalance}.`)
         } else {
             return console.log('You are trying to withdraw more than your balance and overdraft limit.')
         };
@@ -67,27 +58,33 @@ class checkingAccount extends Account{
 let janechecking = new checkingAccount(2, 100, 'Jane', 30);
 janechecking.deposit(100); 
 console.log(janechecking.currentBalance) // 200
+janechecking.withdraw(250)
 
 
-
-// Savings Account (child) with 
-class savingsAccount extends Account{
+// Savings Account (child) with interestRate
+class SavingsAccount extends Account{
     constructor(accountNumber, currentBalance, owner){
         super(accountNumber, currentBalance, owner);
+    }
+
+    addInterest(interestRate){
+        this.interestRate = interestRate
+        let newBalance = this.currentBalance*interestRate + this.currentBalance
+        return console.log(`Your new balance is ${newBalance}.`)
     }
 }
 
 
 // const checkingAccount = new CheckingAccount('123456', 1000, 'John Doe', 500);
-// const savingsAccount = new SavingsAccount('654321', 5000, 'Jane Smith', 2);
+const savingsAccount = new SavingsAccount('654321', 5000, 'Jane Smith', 2);
 
 // checkingAccount.deposit(500);
 // checkingAccount.withdraw(1400);
 // checkingAccount.withdraw(200);  
 
-// savingsAccount.deposit(1000);
-// savingsAccount.withdraw(7000);
-// savingsAccount.addInterest();
+savingsAccount.deposit(1000); // Your new balance is $6000
+savingsAccount.withdraw(7000); // You do not have sufficient funds.
+savingsAccount.addInterest(.15); // Your new balance is $6900.
 
 
 
