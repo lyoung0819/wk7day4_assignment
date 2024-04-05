@@ -90,7 +90,7 @@ savingsAccount.addInterest(.15); // Your new balance is $6900.
 
 
 
-
+console.clear()
 // Exercise 2 - Promises 
 // Using the below getMovieInfo function, which is a Promised-base function, write an asynchronous function (.then().catch() or async/await)
 // called printMovieInfo that will take in a movie title and then either displays the movie information or logs an error with a console.warn().
@@ -113,7 +113,14 @@ function getMovieInfo(movieName){
     })
 }
 
-function printMovieInfo(){};
+function printMovieInfo(movieName){
+    getMovieInfo(movieName)
+        .then(movie => {
+            console.log(`${movie.title} directed by ${movie.director}. A story about ${movie.description} that runs for ${movie.runtime} minutes.`)}
+        )
+        .catch(movie => console.warn(`${movie.title} cannot be accessed because it is too short.`))
+};
+
 
 // Example 1
 printMovieInfo('Indiana Jones and the Dark Knight')
