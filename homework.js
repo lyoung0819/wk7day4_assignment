@@ -76,7 +76,7 @@ class SavingsAccount extends Account{
     }
 }
 
-
+// Tests:
 const checkingAccount = new CheckingAccount('123456', 1000, 'John Doe', 500);
 const savingsAccount = new SavingsAccount('654321', 5000, 'Jane Smith', 2);
 
@@ -89,12 +89,9 @@ savingsAccount.withdraw(7000); // You do not have sufficient funds.
 savingsAccount.addInterest(.15); // Your new balance is $6900.
 
 
-
-console.clear()
 // Exercise 2 - Promises 
 // Using the below getMovieInfo function, which is a Promised-base function, write an asynchronous function (.then().catch() or async/await)
 // called printMovieInfo that will take in a movie title and then either displays the movie information or logs an error with a console.warn().
-
 
 function getMovieInfo(movieName){
     return new Promise((resolve, reject) => {
@@ -121,7 +118,6 @@ function printMovieInfo(movieName){
         .catch(movie => console.warn(`${movie.title} cannot be accessed because it is too short.`))
 };
 
-
 // Example 1
 printMovieInfo('Indiana Jones and the Dark Knight')
 // Output: Indiana Jones and the Dark Knight directed by Christopher Spielberg. A story of Good vs Evil that runs for 157 minutes.
@@ -137,10 +133,12 @@ printMovieInfo('ET')
 // Add a Button somewhere on your index.html page with an id "backgroundChanger"
 // Add a click event listener to your button that will change the background color of the body
 
-document.getElementById('backgroundChanger').addEventListener("click", function() {
-    const curColour = document.body.style.backgroundColor;
-    document.body.style.backgroundColor = curColour === 'red' ? 'blue' : 'red';
-});
+// const button = document.getElementById('backgroundChanger');
+
+// button.addEventListener("click", function() {
+//     const curColour = document.body.style.backgroundColor;
+//     document.body.style.backgroundColor = curColour === 'red' ? 'blue' : 'red';
+// });
 
 // The background should toggle between at least 2 colors
 
